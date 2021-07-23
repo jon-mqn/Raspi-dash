@@ -7,7 +7,7 @@ import time
 class Stats():
 
     def __init__(self):
-		print('init stats')
+        print('init stats')
 
     def get_memory(self):
         """Returns memory statistics from /proc/meminfo as a dict
@@ -86,12 +86,12 @@ class Stats():
         lastboot = lastboot.split()
         if len(lastboot) != 4:
             return
-        lbdate = datetime.strptime(lastboot[2]+","+lastboot[3], "%Y-%m-%d,%H:%M")
+        lbdate = datetime.strptime(lastboot[2].decode()+","+lastboot[3].decode(), "%Y-%m-%d,%H:%M")
         return lbdate
 
     def get_filesystem(self):
         """Returns each row of the df -h output as a string in a list."""
-        fs = subprocess.check_output(['df','-h'])
+        fs = subprocess.check_output(['df','-h']).decode()
         if len(fs) <= 0:
             return
         fs = fs.split('\n')
@@ -111,7 +111,7 @@ class Stats():
         averages from uptime.
         Dict values:
         onemin, fivemin, fifteenmin"""
-        uptime = subprocess.check_output(['uptime'])
+        uptime = subprocess.check_output(['uptime']).decode()
         if len(uptime) <= 0:
             return
         try:

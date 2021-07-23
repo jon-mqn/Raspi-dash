@@ -1,7 +1,7 @@
 import os
 from app import app
 from flask import render_template, flash, redirect, url_for, request, g
-from stats import Stats
+from app.stats import Stats
 from datetime import datetime
 
 @app.route('/')
